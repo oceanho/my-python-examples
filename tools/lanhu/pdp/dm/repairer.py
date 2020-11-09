@@ -24,7 +24,6 @@ class ContentRepairer(OneProducerMultipleConsumer):
     # Override __consumer__()
     # impl the Content repairer consume logic at here.
     def __consumer__(self, worker_id):
-        self.reporter.report('INFO', "self.consumer_has_done(): {}".format(self.consumer_has_done()))
         while not self.has_done():
             try:
                 url = self.queues.get(timeout=1)
