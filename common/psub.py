@@ -60,6 +60,7 @@ class OneProducerMultipleConsumer(object):
         self.errs = []
         self.queues = Queue(8192)
         self.reporter = Reporter()
+        self.__exit_code = 0
         self.__producer_has_done = False
         self.__consumer_has_done = False
         self.consumer_workers = []
@@ -76,6 +77,13 @@ class OneProducerMultipleConsumer(object):
         while not self.__producer_has_done or not self.queues.empty():
             sleep(1)
         self.__consumer_has_done = True
+
+    def __report_errors(self):
+        for err in self.errs:
+            stdout.write(err + "\n")
+        stdout.flush()
+        self.__exit_code = 127 if len(self.errs) > 0 else 0
+        self.errs.clear()
 
     def start(self):
         """
@@ -94,7 +102,8 @@ class OneProducerMultipleConsumer(object):
             t = cw["thread"]
             t.join()
         self.reporter.stop()
-        return len(self.errs)
+        self.__report_errors()
+        return self.__exit_code
 
     """
     设置 producer 状态为已完成

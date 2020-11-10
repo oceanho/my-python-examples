@@ -17,6 +17,6 @@ import sys
 sys.path.append(os.path.join(os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.path.sep + "..")))
 
 if __name__ == '__main__':
-    from tools.lanhu.pdp.dm.repairer import ContentRepairer
-    app = ContentRepairer()
+    from tools.lanhu.pdp.dm.integrity_checker import DataIntegrityChecker
+    app = DataIntegrityChecker()
     sys.exit(app.start())
