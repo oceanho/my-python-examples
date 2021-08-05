@@ -8,7 +8,6 @@ import sys
 因为 bin/*.py 可能会有很多可执行的 Python 程序文件，它们都不是在根目录下
 我们执行 bin/ 目录下的程序的方式可能有以下几种
 
-1. 在项目根目录执行,比如: python bin/lh_pdp_repairer.py
 2. 在项目 bin 目录执行,比如: python lh_pdp_repairer.py
 
 为解决在任意目录下执行 bin/ 目录下的 .py 文件都可以正常 working (Not found Named xxx Module 问题)
